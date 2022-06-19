@@ -9,7 +9,7 @@ winner: Union[str, None] = None
 gameRunning: bool = True
 
 
-def printBoard(Board):
+def printBoard(Board: List[str]) -> None:
      print("Places for your help:")
      print("1 | 2 | 3")
      print("4 | 5 | 6")
@@ -19,7 +19,7 @@ def printBoard(Board):
      print(Board[3],"|",Board[4],"|",Board[5])
      print(Board[6],"|",Board[7],"|",Board[8])
 
-def userInput(Board):
+def userInput(Board: List[str]) -> None:
         value: int = int(input("Enter your place between 1 to 9: "))
 
         if value >= 1 and value <= 9 and Board[value-1] == '-':
@@ -27,7 +27,7 @@ def userInput(Board):
         else:
             print("Either entered value is incorrect or place is occupied. Please Try Again !!!")
 
-def checkHorizontal(Board):
+def checkHorizontal(Board: List[str]) -> bool:
     global winner
     if Board[0]==Board[1]==Board[2] and Board[1] != '-':
         winner = Board[0]
@@ -39,7 +39,7 @@ def checkHorizontal(Board):
         winner = Board[6]
         return True
 
-def checkVertical(Board):
+def checkVertical(Board: List[str]) -> bool:
     global winner
     if Board[0]==Board[3]==Board[6] and Board[3] != '-':
         winner = Board[0]
@@ -51,7 +51,7 @@ def checkVertical(Board):
         winner = Board[2]
         return True
 
-def checkDiagonal(Board):
+def checkDiagonal(Board: List[str]) -> bool:
     global winner
     if Board[0]==Board[4]==Board[8] and Board[4] != '-':
         winner = Board[0]
@@ -60,7 +60,7 @@ def checkDiagonal(Board):
         winner = Board[2]
         return True
 
-def checkWin(Board):
+def checkWin(Board: List[str]) -> None:
     global gameRunning
     if checkHorizontal(Board) or checkVertical(Board) or checkDiagonal(Board):
         printBoard(Board)
@@ -68,7 +68,7 @@ def checkWin(Board):
         print(f"Congratulations! {winner} won the game!!!")
         gameRunning = False
 
-def checkTie(Board):
+def checkTie(Board: List[str]) -> None:
     global gameRunning
     if '-' not in Board:
         printBoard(Board)
@@ -76,21 +76,21 @@ def checkTie(Board):
         print('It is a Tie !!!')
         gameRunning = False
 
-def switchPlayer():
+def switchPlayer() -> None:
     global currentPlayer
     if currentPlayer == 'X':
         currentPlayer = 'O'
     else:
         currentPlayer = 'X'
 
-def computer(Board):
+def computer(Board: List[str]) -> None:
     global currentPlayer
     if currentPlayer == 'O':
         position = random.randint(0,8)
         Board[position] = currentPlayer
         switchPlayer()
 
-def choosePlayer2(player):
+def choosePlayer2(player: str) -> None:
     if player == '1':
         while gameRunning:
             printBoard(Board)
