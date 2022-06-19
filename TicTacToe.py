@@ -1,10 +1,13 @@
+from typing import List, Union
 import random
 
-Board = ['-' for item in range(9)]
 
-currentPlayer = 'X'
-winner = None
-gameRunning = True
+Board: List[str] = ['-' for item in range(9)]
+
+currentPlayer: str = 'X'
+winner: Union[str, None] = None
+gameRunning: bool = True
+
 
 def printBoard(Board):
      print("Places for your help:")
@@ -17,7 +20,7 @@ def printBoard(Board):
      print(Board[6],"|",Board[7],"|",Board[8])
 
 def userInput(Board):
-        value = int(input("Enter your place between 1 to 9: "))
+        value: int = int(input("Enter your place between 1 to 9: "))
 
         if value >= 1 and value <= 9 and Board[value-1] == '-':
             Board[value-1] = currentPlayer
@@ -104,8 +107,8 @@ def choosePlayer2(player):
             switchPlayer()
             computer(Board)
 
-if __name__=="__main__":
 
+if __name__=="__main__":
     player2 = input("Enter (1) for player2 and (2) for computer: ")
     choosePlayer2(player2)
 
